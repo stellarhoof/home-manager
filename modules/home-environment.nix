@@ -198,6 +198,13 @@ in
       '';
     };
 
+    home.sessionVariablesUnquoted = mkOption {
+      default = {};
+      type = types.attrs;
+      example = { EDITOR = "emacs"; GS_OPTIONS = "-sPAPERSIZE=a4"; };
+      description = "";
+    };
+
     home.packages = mkOption {
       type = types.listOf types.package;
       default = [];
@@ -352,6 +359,7 @@ in
             export __HM_SESS_VARS_SOURCED=1
 
             ${config.lib.shell.exportAll cfg.sessionVariables}
+            ${config.lib.shell.exportAllUnquoted cfg.sessionVariablesUnquoted}
           '';
         }
       )
